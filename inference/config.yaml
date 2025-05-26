@@ -1,0 +1,4 @@
+database:
+  uri: postgresql://mlops_user:CHANGE_ME@localhost:5432/mlops
+model:
+  path: C:\Users\soroush\Desktop\assignment\second attempt\models\pipeline_3e3b20dc0013463eba12ef1caf13c84d.pkl

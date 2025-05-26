@@ -1,0 +1,12 @@
+database:
+  uri: postgresql://mlops_user:CHANGE_ME@localhost:5432/mlops
+  predictions_table: predictions
+  actuals_table: actuals
+
+thresholds:
+  mean_drift: 0.1
+  ks_pvalue: 0.05
+
+performance:
+  min_accuracy: 0.75
+  min_auc: 0.80

@@ -1,0 +1,45 @@
+name: MLOps CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  lint-test-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.10, 3.11]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with: python-version: ${{ matrix.python }}
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+    - name: Run tests
+      run: pytest -q
+    - name: Lint
+      run: flake8 .
+    - name: Build Docker image
+      run: docker build -t mlops-assignment:ci .
+
+  deploy:
+    needs: lint-test-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Push Docker image
+      run: |
+        echo "${{ secrets.DOCKER_PASS }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+        docker tag mlops-assignment:ci ${{ secrets.DOCKER_USER }}/mlops-assignment:latest
+        docker push ${{ secrets.DOCKER_USER }}/mlops-assignment:latest
+    - name: Deploy to Kubernetes
+      uses: azure/k8s-deploy@v3
+      with:
+        manifests: kubernetes/*.yaml
+        images: |
+          ${{ secrets.DOCKER_USER }}/mlops-assignment:latest

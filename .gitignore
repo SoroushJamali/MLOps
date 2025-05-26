@@ -1,0 +1,16 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+# DVC
+*.dvc
+# Jupyter
+.ipynb_checkpoints/
+# IDEs
+.vscode/
+.idea/
+# Models
+models/*.pkl

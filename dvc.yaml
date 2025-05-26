@@ -1,0 +1,24 @@
+stages:
+  ingest:
+    cmd: python training/preprocess.py --input-dir data/raw --output-dir data/processed
+    deps:
+      - training/preprocess.py
+      - data/raw
+    outs:
+      - data/processed
+  train:
+    cmd: python training/train.py
+    deps:
+      - training/train.py
+      - training/preprocess.py
+      - data/processed
+    outs:
+      - models/
+  predict:
+    cmd: python inference/predict.py
+    deps:
+      - inference/predict.py
+      - models/
+      - data/predict
+    outs:
+      - inference_results.parquet

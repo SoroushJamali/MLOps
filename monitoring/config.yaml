@@ -1,0 +1,12 @@
+paths:
+  train: C:\Users\soroush\Desktop\assignment\second attempt\data\train\chunk_01.parquet
+  predict: C:\Users\soroush\Desktop\assignment\second attempt\data\predict\chunk_01.parquet
+  report: monitoring/monitoring_report.json
+
+thresholds:
+  mean_drift: 0.1
+  ks_pvalue: 0.05
+
+alert:
+  slack_webhook: ${SLACK_WEBHOOK_URL}
+  pagerduty_key: ${PAGERDUTY_ROUTING_KEY}

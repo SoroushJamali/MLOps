@@ -1,0 +1,27 @@
+# Core
+pandas==2.2.3
+pyarrow==18.0.0
+scikit-learn==1.6.1
+xgboost==2.1.4
+joblib==1.5.1
+
+# Distributed
+dask[complete]== 2024.8.0
+
+# MLflow
+mlflow==2.22.0
+
+# Monitoring
+evidently==0.7.5
+scipy== 1.13.1
+requests==2.32.3
+python-dotenv==1.1.0
+
+# API & DB
+fastapi==0.111.0
+uvicorn==0.29.0
+sqlalchemy==2.0.0
+psycopg2-binary==2.9.10
+
+# Testing
+pytest==7.4.0

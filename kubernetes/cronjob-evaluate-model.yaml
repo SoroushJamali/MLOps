@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: evaluate-model-cron
+spec:
+  schedule: "0 1 * * *"         # daily at 01:00
+  concurrencyPolicy: Forbid     # don’t run overdue jobs concurrently
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: evaluator
+            image: yourdockerhubuser/mlops-assignment:latest
+            imagePullPolicy: IfNotPresent
+            command: ["python", "-u", "monitoring/evaluate_model.py"]
+            env:
+            - name: DB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mlops-secrets
+                  key: db_uri
+            - name: MLFLOW_TRACKING_URI
+              value: http://mlflow:5000
+          restartPolicy: OnFailure
