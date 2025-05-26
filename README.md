@@ -1,4 +1,4 @@
-````md
+
 # MLOps Assignment
 
 ## Overview
@@ -11,7 +11,7 @@ End-to-end pipeline: data ingestion → preprocessing → distributed training �
 3. **DVC** (Data Version Control) installed:  
    ```powershell
    pip install dvc
-````
+
 
 4. *(Optional)* **Minikube** or access to a Kubernetes cluster
 5. *(Optional)* **PostgreSQL** running (or skip—scripts will fall back to local files)
